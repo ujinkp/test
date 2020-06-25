@@ -4,36 +4,47 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Button,
   KeyboardAvoidingView,
 } from 'react-native';
+import { Routes } from '../../navigation/Routes';
+import {w} from '../../utils/Layout';
 
-const Login = () => {
-  let [userEmail, setUserEmail] = useState('');
-  let [userPassword, setUserPassword] = useState('');
+import CustomButton from '../../components/Button';
+
+const data = { email: "mail@com.ua", password: "1234" }
+
+const Login = ({navigation, props}) => {
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
 
   const handleSubmitPress = () => {
-    alert('ALERT');
+    if (userEmail !== data.email || userPassword !== data.password) {
+      alert('INVALID DATA');
+    } else {
+      navigation.navigate(Routes.Tabs)
+      // alert('LOGIN');//SWITCH ON TODO SCREEN
+    }
   };
 
   return (
     <View style={styles.mainBody}>
       <View style={{marginTop: 100}}>
         <KeyboardAvoidingView enabled>
-          <Text>LoginScreen</Text>
           <TextInput
             onChangeText={UserEmail => setUserEmail(UserEmail)}
             style={styles.input}
             placeholder="Enter Email"
           />
+
           <TextInput
             onChangeText={UserPassword => setUserPassword(UserPassword)}
             style={styles.input}
             placeholder="Enter Password"
           />
-          <Button
+
+          <CustomButton 
+            title="Login"
             style={styles.loginButton}
-            title="login"
             onPress={handleSubmitPress}
           />
         </KeyboardAvoidingView>
@@ -52,7 +63,8 @@ styles = StyleSheet.create({
     borderWidth: 1,
   },
   loginButton: {
-    flex: 1,
+    alignItems: 'center',
+    marginHorizontal: w(20)
   },
 });
 

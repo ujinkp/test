@@ -1,13 +1,18 @@
 import React from 'react';
-import {Text, SafeAreaView} from 'react-native';
+import {Text, SafeAreaView, KeyboardAvoidingView} from 'react-native';
 
-import LoginScreen from './login-screen/index'; 
+import AppNavigator from '../navigation/AppNavigator';
 
 const MainApp = () => {
   return (
     <>
-      <SafeAreaView />
-      <LoginScreen/>
+      <KeyboardAvoidingView 
+          style={styles.mainBody}
+          behavior={Platform.OS === "ios" ? "padding" : null}>
+      <SafeAreaView style={styles.container} />
+      {/* <LoginScreen/> */}
+      <AppNavigator/>
+      </KeyboardAvoidingView>
     </>
   );
 };

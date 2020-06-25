@@ -1,11 +1,13 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-
 import MainApp from './src/screens/MainApp';
 
 const App = () => {
   return (
     <>
-      <MainApp />
+     {/* <NavigationContainer> */}
+        <MainApp />
+      {/* </NavigationContainer> */}
     </>
   );
 };
