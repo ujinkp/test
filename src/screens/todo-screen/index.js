@@ -1,37 +1,34 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import {w, h} from '../../utils/Layout'; 
 
 import CustomButton from '../../components/Button';
 import Card from '../../components/Card';
-
-const data = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-  ];
-
-
-  
-
+               
+        
 const TodoScreen = (props) => {
 
-    const renderItem = (item) =>  {
-      console.log("ITEM",item)
-      return (
+  const [data, setData] = useState(() => []);
+  const [text, setText] = useState('');
+  const changeText = text => setText(text)
+          
+  const addData = (item) => {
+    if(text.length > 0) {
+      setData([
+        ...data, 
+        {id: item.id, title: text, isComplete: false }
+      ])
+    }
+    setText('')
+  };
+          
+  const renderItem = (item) =>  {
+    console.log("ITEM",item)
+    return (
       <Card title={item.item.title} />
-    )};
-
-    const keyExtractor = (item) =>  item.id;
+      )};
+      
+  const keyExtractor = (item) =>  item.id;
 
 
     return (
@@ -47,10 +44,16 @@ const TodoScreen = (props) => {
                 />
 
             <View style={styles.footer}>
-              <TextInput style={styles.input} />
+                <TextInput
+                  onChangeText={changeText}
+                  style={styles.input}
+                  placeholder="Enter To do"
+                  value={text}
+                />
                 <CustomButton
-                  title="OK"
+                  title="+"
                   style={styles.submitButton}
+                  onPress={addData}
                 />
             </View>
             <View>
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
       padding:  w(3)
     },
     submitButton: {
-
+      padding: w(3)
     },
     list: {
       margin: w(5)

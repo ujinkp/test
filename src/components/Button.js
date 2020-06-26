@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text, Keyboard, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import {w, h} from '../utils/Layout'; 
 
 const CustomButton = ({title = "", style, onPress = () => null}) => {
     // console.log("PROPS",props)
@@ -18,8 +19,8 @@ const CustomButton = ({title = "", style, onPress = () => null}) => {
 
 const styles = StyleSheet.create({
     buttonContainer:  {
-        margin: 10,
-        padding: 10,
+        margin: w(1),
+        padding: w(5),
         borderRadius: 10,
         backgroundColor: '#03a5fc'
     },

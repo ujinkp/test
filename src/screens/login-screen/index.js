@@ -11,7 +11,7 @@ import {w} from '../../utils/Layout';
 
 import CustomButton from '../../components/Button';
 
-const data = { email: "mail@com.ua", password: "1234" }
+const data = { email: "1", password: "2" }
 
 const Login = ({navigation, props}) => {
   const [userEmail, setUserEmail] = useState('');
