@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import {w, h} from '../../utils/Layout'; 
+import { View, TextInput, StyleSheet } from 'react-native';
 
+import {w, h} from '../../utils/Layout'; 
 import CustomButton from '../../components/Button';
-import Card from '../../components/Card';
-               
+import CustomList from '../../components/List';
+
         
 const TodoScreen = (props) => {
 
@@ -13,34 +13,33 @@ const TodoScreen = (props) => {
   const changeText = text => setText(text)
           
   const addData = (item) => {
+    console.log2("ITEM",item)
     if(text.length > 0) {
       setData([
         ...data, 
-        {id: item.id, title: text, isComplete: false }
+        {id: item.id, title: "text" }
       ])
     }
     setText('')
   };
-          
-  const renderItem = (item) =>  {
-    console.log("ITEM",item)
-    return (
-      <Card title={item.item.title} />
-      )};
-      
-  const keyExtractor = (item) =>  item.id;
 
+  const removeItem = (id) => {
+    setData(data.filter(item => item.id !== id))
+  };
 
+  const completeItem = id => {
+    setData(data.map(item => {
+        return item.id === id ? {...item, isComplete: !item.isComplete} : item
+    }))
+}
     return (
         <>
 
         <View  style={styles.mainBody}>
-            
-            <FlatList 
-                data={data}
-                style={styles.list}
-                renderItem={renderItem}
-                keyExtractor={keyExtractor}
+                <CustomList
+                  data={data}
+                  removeItem={removeItem}
+                  completeItem={completeItem}
                 />
 
             <View style={styles.footer}>

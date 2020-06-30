@@ -1,25 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import {h, w, width} from '../utils/Layout'; 
 
+import {h, w} from '../utils/Layout'; 
 import CustomButton from '../components/Button';
 
-const Card = ( {title = "", style} ) => {
+const Card = ( {title = "", style, remove, complete} ) => {
+  
     return (
-      <View style={[styles.item, style]}>
-        <View style={{width: '80%'}}>
+      <View style={[styles.itemBody, style]}>
+        <View style={styles.itemText}>
           <Text style={styles.title}>{title}</Text>
         </View>
         <View>
           <CustomButton
             title="v"
             style={styles.doneButton}
-            // onPress={addData}
+            onPress={complete}
           />
           <CustomButton
             title="х"
             style={styles.deleteButton}
-            // onPress={addData}
+            onPress={remove}
           />
         </View>
       </View>
@@ -27,7 +28,7 @@ const Card = ( {title = "", style} ) => {
   }
 
   const styles = StyleSheet.create({
-    item: {
+    itemBody: {
       flex: 1,
       flexDirection: 'row',
       height: h(6),
@@ -38,6 +39,9 @@ const Card = ( {title = "", style} ) => {
       borderColor: 'black',
       borderWidth: 1
     },
+    itemText: {
+      width: '80%'
+    },
     title: {
       padding: w(1),
       color: 'black',
@@ -47,7 +51,7 @@ const Card = ( {title = "", style} ) => {
       margin: null,
       padding: w(1),
       borderRadius: null,
-      backgroundColor: 'green'
+      backgroundColor: 'green',
     },
     deleteButton: {
       margin: null,
