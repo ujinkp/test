@@ -8,16 +8,15 @@ import CustomList from '../../components/List';
         
 const TodoScreen = (props) => {
 
-  const [data, setData] = useState(() => []);
+  const [data, setData] = useState([]);
   const [text, setText] = useState('');
   const changeText = text => setText(text)
           
   const addData = (item) => {
-    console.log2("ITEM",item)
     if(text.length > 0) {
       setData([
         ...data, 
-        {id: item.id, title: "text" }
+        {id: String(new Date()), title: text, isComplete: false }
       ])
     }
     setText('')

@@ -10,7 +10,8 @@ const CustomList = ({data, removeItem, completeItem}) => {
         <Card 
             title={item.title} 
             remove={() => removeItem(item.id)} 
-            complete={() => completeItem(item.id)} 
+            complete={() => completeItem(item.id)}
+            isComplete={item.isComplete}
         />
 
     return(
@@ -20,7 +21,6 @@ const CustomList = ({data, removeItem, completeItem}) => {
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 style={styles.list}
-                //deleteItem={removeItem}
                 />
         </View>
     );
